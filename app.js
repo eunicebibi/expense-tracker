@@ -8,8 +8,8 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express()
 const port ='3000'
 
-app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.set('strictQuery', false)
@@ -27,7 +27,7 @@ db.once('open', () => {
 
 
 app.get('/', (req, res) => {
-  res.send('hello world')
+  res.render('index')
 })
 
 
