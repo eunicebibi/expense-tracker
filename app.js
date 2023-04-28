@@ -11,7 +11,8 @@ const port ='3000'
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.set('strictQuery', false)
 // 取得資料庫連線狀態
 const db = mongoose.connection
 // 連線異常
