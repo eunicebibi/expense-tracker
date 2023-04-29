@@ -1,1 +1,44 @@
-<h1>Index</h1>
+{{!-- 類別選單 --}}
+<div class="container category">
+  <form action="">
+  <select name="category" id="category" class="form-select form-select-bg mb-3" aria-label="category">
+    <option selected>類別</option>
+    <option value="1">家居物業</option>
+    <option value="2">交通出行</option>
+    <option value="3">休閒娛樂</option>
+    <option value="4">餐飲食品</option>
+    <option value="5">其他</option>
+  </select>
+  </form>
+</div>
+
+{{!-- 金額顯示 --}}
+<div name="total" id="total" class="container mt-5">
+  <p>總金額：</p>
+    <div name="totalAmount" id="totalAmount" >
+      123
+    </div>
+</div>
+
+{{!-- 細項顯示 --}}
+<div name="detail-outer">
+  <div name="detail-list">
+    <div name="category">
+      <i></i>
+    </div>
+    <div name="detail-middle">
+      <div name="detail-info"></div>
+        <div name="detail-name"></div>
+        <div name="detail-date"></div>
+      <div name="detail-amount"></div>
+    </div>
+    <div name="edit_delete">
+     <a href="">修改</a>
+     <a href="">刪除</a>
+    </div>
+  </div>
+</div>
+{{!-- 新增支出按鈕 --}}
+<div name="new">
+  <a href="">新增支出</a>
+</div>
