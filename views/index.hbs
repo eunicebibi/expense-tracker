@@ -16,21 +16,22 @@
 <div name="total" id="total" class="container mt-5">
   <p>總金額：</p>
     <div name="totalAmount" id="totalAmount" >
-      123
+      123{{totalAmount}}
     </div>
 </div>
 
 {{!-- 細項顯示 --}}
+{{#each detailsData}}
 <div name="detail-outer">
   <div name="detail-list">
     <div name="category">
-      <i></i>
+      <i>{{category}}</i>
     </div>
     <div name="detail-middle">
       <div name="detail-info"></div>
-        <div name="detail-name"></div>
-        <div name="detail-date"></div>
-      <div name="detail-amount"></div>
+        <div name="detail-name">{{this.name}}</div>
+        <div name="detail-date">{{this.date}}</div>
+      <div name="detail-amount">{{this.amount}}</div>
     </div>
     <div name="edit_delete">
      <a href="">修改</a>
@@ -38,7 +39,8 @@
     </div>
   </div>
 </div>
+
 {{!-- 新增支出按鈕 --}}
 <div name="new">
-  <a href="">新增支出</a>
+  <a href="/new">新增支出</a>
 </div>

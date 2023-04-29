@@ -1,6 +1,9 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
+const Detail = require('./models/detail')
+const bodyParser = require('body-parser')
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -24,15 +27,28 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
+app.use(bodyParser.urlencoded({ extended: true }))
 
-
+//首頁
 app.get('/', (req, res) => {
-  res.render('index')
+  Detail.find()
+      .lean()
+      .then(detailsData => res.render('index', {detailsData}))
+      .catch(err => console.log(err))
 })
 
-app.get('/detail/new', (req,res) => {
+//新增頁面
+app.get('/new', (req,res) => {
   return res.render('new')
 })
+//儲存新增
+app.post('/', (req, res) => {
+  return Detail.create(req.body)
+    .then(() => res.redirect("/"))
+    .catch(err => console.log(err))
+})
+
+
 
 app.listen(port, () => {
   console.log(`App is running on http://localhost:${port}`)
