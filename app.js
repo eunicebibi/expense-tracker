@@ -30,7 +30,9 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-
+app.get('/detail/new', (req,res) => {
+  return res.render('new')
+})
 
 app.listen(port, () => {
   console.log(`App is running on http://localhost:${port}`)
