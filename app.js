@@ -30,21 +30,40 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 //首頁
 app.get('/', (req, res) => {
-  Detail.find()
-      .lean()
-      .then(details => res.render('index', {details}))
-      .catch(err => console.log(err))
+  Detail.find().lean()
+    .then(details => {
+      //transform date format to YYYY/MM/DD
+      return details.map((detail) => {
+        if (detaile) {
+          let formattedDate = detail.date.toLocaleDateString()
+          detail.date = formattedDate
+          return detail
+        }
+      })
+    })
+    .then((details) => {
+      res.render('index', { details })
+    })
+    .catch(err => console.log(err))
 })
 
 //新增頁面
 app.get('/new', (req,res) => {
-  return res.render('new')
+  const categories = Category.find().lean()
+  return res.render('new', {categories})
 })
 
 //儲存新增
 app.post('/', (req, res) => {
   // console.log(req.body)
-  return Detail.create(req.body)
+  const detailsData = {
+    categoryId: req.body.categoryId,
+    // userId: req.user._id,
+    name: req.body.name,
+    date: req.body.date,
+    amount: req.body.amount,
+  };
+  return Detail.create({...detailsData})
     .then(() => res.redirect("/"))
     .catch(err => console.log(err))
 })

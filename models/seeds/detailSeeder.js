@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Detail = require('../detail') 
 const Category = require('../category')
+const recordsData = require('../../records').results
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -14,4 +15,10 @@ db.on('error', () => {
 })
 db.once('open', () => {
   console.log('mongodb connected!')
+  const categories = Category.find().lean()
+  const categoryIds = {}
+  categories.map(category => {
+    categoryIds[category.name] = category._id
+  })
+  const userId = user._id
 })

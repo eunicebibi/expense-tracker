@@ -1,36 +1,37 @@
 <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-7">
 {{!-- 類別選單 --}}
-<div class="container category">
-  <form action="/filter" method="POST" class="row justify-content-center">
-  <select name="category" id="category" class="form-select form-select-bg mb-3" aria-label="category">
+<div class="row justify-content-center">
+  <form action="/filter" method="POST" >
+  <select name="filter" id="filter" class="form-select form-select-bg mb-3 mt-5" onchange="this.form.submit()">
     <option selected>類別</option>
-    <option value="1">家居物業</option>
-    <option value="2">交通出行</option>
-    <option value="3">休閒娛樂</option>
-    <option value="4">餐飲食品</option>
-    <option value="5">其他</option>
+    {{#if categoryName}}
+    <option value="{{categoryId}}" hidden="hidden" selected="selected">{{categoryName}}</option>
+    {{/if}}
+    {{#each categoryName}}
+        <option value="{{this._id}}">{{this.name}}</option>
+    {{/each}}
   </select>
   </form>
 </div>
 
 {{!-- 金額顯示 --}}
-<div name="total" id="total" class="container mt-5">
-  <p>總金額：</p>
-    <div name="totalAmount" id="totalAmount" >
+<div name="total" id="total" class="flex-column align-items-center m-2 ">
+  <p >總金額：</p>
+    <div class="flex-column align-items-center" name="totalAmount" id="totalAmount" >
      <h2>{{totalAmount}}</h2>
     </div>
 </div>
 
 {{!-- 細項顯示 --}}
 {{#each details}}
-<div name="detail-outer">
-  <div name="detail-list">
-    <div name="category">
-      <i>
-        {{this.icon}}
-        </i>
+<div class="border-bottom bg-success p-2 text-dark bg-opacity-10 container justify-content-md-center" name="detail-outer">
+  <div class="row justify-content-md-center"  name="detail-list">
+    <div class="col col-lg-2" name="category">
+      <i class="{{ this.icon }}"></i>
     </div>
-    <div name="detail-middle">
+    <div class="col-md-auto" name="detail-middle">
       <div name="detail-info"></div>
         <div name="detail-name">
           {{this.name}}
@@ -38,11 +39,11 @@
         <div name="detail-date">
           {{this.date}}
           </div>
-      <div name="detail-amount">
+      <div class="col col-lg-2" name="detail-amount">
         {{this.amount}}
         </div>
     </div>
-    <div name="edit_delete">
+    <div class="col col-lg-2" name="edit_delete">
      <a href="">修改</a>
      <a href="">刪除</a>
     </div>
@@ -50,7 +51,9 @@
 </div>
 {{/each}}
 {{!-- 新增品項支出按鈕 --}}
-<div class="text-center">
-    <a href="/new"><button class="btn btn-major" type="submit" id="create">新增支出</button></a>
+<div class="text-center mt-5">
+    <a href="/new"><button class="btn btn-outline-success" type="submit" id="create">新增支出</button></a>
+</div>
+</div>
 </div>
 </div>
