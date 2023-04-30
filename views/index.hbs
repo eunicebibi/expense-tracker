@@ -1,6 +1,7 @@
+<div class="container">
 {{!-- 類別選單 --}}
 <div class="container category">
-  <form action="">
+  <form action="/filter" method="POST" class="row justify-content-center">
   <select name="category" id="category" class="form-select form-select-bg mb-3" aria-label="category">
     <option selected>類別</option>
     <option value="1">家居物業</option>
@@ -16,22 +17,30 @@
 <div name="total" id="total" class="container mt-5">
   <p>總金額：</p>
     <div name="totalAmount" id="totalAmount" >
-      123{{totalAmount}}
+     <h2>{{totalAmount}}</h2>
     </div>
 </div>
 
 {{!-- 細項顯示 --}}
-{{#each detailsData}}
+{{#each details}}
 <div name="detail-outer">
   <div name="detail-list">
     <div name="category">
-      <i>{{category}}</i>
+      <i>
+        {{this.icon}}
+        </i>
     </div>
     <div name="detail-middle">
       <div name="detail-info"></div>
-        <div name="detail-name">{{this.name}}</div>
-        <div name="detail-date">{{this.date}}</div>
-      <div name="detail-amount">{{this.amount}}</div>
+        <div name="detail-name">
+          {{this.name}}
+          </div>
+        <div name="detail-date">
+          {{this.date}}
+          </div>
+      <div name="detail-amount">
+        {{this.amount}}
+        </div>
     </div>
     <div name="edit_delete">
      <a href="">修改</a>
@@ -39,8 +48,9 @@
     </div>
   </div>
 </div>
-
-{{!-- 新增支出按鈕 --}}
-<div name="new">
-  <a href="/new">新增支出</a>
+{{/each}}
+{{!-- 新增品項支出按鈕 --}}
+<div class="text-center">
+    <a href="/new"><button class="btn btn-major" type="submit" id="create">新增支出</button></a>
+</div>
 </div>

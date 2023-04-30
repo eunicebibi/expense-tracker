@@ -2,15 +2,14 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const Detail = require('./models/detail')
+const Category = require('./models/category')
 const bodyParser = require('body-parser')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-
-const app = express()
 const port ='3000'
-
+const app = express()
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
@@ -33,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
   Detail.find()
       .lean()
-      .then(detailsData => res.render('index', {detailsData}))
+      .then(details => res.render('index', {details}))
       .catch(err => console.log(err))
 })
 
@@ -41,8 +40,10 @@ app.get('/', (req, res) => {
 app.get('/new', (req,res) => {
   return res.render('new')
 })
+
 //儲存新增
 app.post('/', (req, res) => {
+  // console.log(req.body)
   return Detail.create(req.body)
     .then(() => res.redirect("/"))
     .catch(err => console.log(err))

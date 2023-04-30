@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const Detail = require('../detail') // 載入  model
+const Detail = require('../detail') 
+const Category = require('../category')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
