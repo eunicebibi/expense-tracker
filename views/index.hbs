@@ -44,8 +44,10 @@
         </div>
     </div>
     <div class="col col-lg-2" name="edit_delete">
-     <a href="">修改</a>
-     <a href="">刪除</a>
+     <a class="btn btn-outline-secondary" href="./{{ this._id }}/edit">修改</a>
+     <form action="./{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+     <button class="btn btn-outline-danger" type="submit">delete</button>
+     </form>
     </div>
   </div>
 </div>
