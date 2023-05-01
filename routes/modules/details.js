@@ -37,41 +37,58 @@ try{
 })
 
 //修改
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', async(req, res) => {
+try{
   const userId = req.user._id
   const _id = req.params.id
-  return Detail.findByOne({_id, userId})
-    .lean()
-    .then((detail) => res.render('edit', { detail }))
-    .catch(err => console.log(err))
+  const categories = await Category.find().lean()
+  const detail = await Detail.findOne({_id, userId}).lean()
+  const category = await Category.findOne({_id: detail.categoryId}).lean()
+  detail.categoryName = category.name
+  detail.date = detail.date.toISOString().slice(0, 10)
+  res.render('edit', {detail, categories})
+} catch (err){
+  console.log(err)
+}
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async(req, res) => {
+try{
   const userId = req.user._id
   const _id = req.params.id
-  const { name, isDone } = req.body
-  const detailsData = {
-    name: req.body.name,
-    date: req.body.date,
-    categoryId: req.body.categoryId,
-    amount: req.body.amount,
-  };
-  return Detail.findOne({ _id, userId })
-    .then(detail => {
-      detail.set(detailsData);
-      return detail.save()
-    })
+  const { name, date, categoryId, amount } = req.body
+
+  if (name.length > 50) {
+    return editValidation(res, _id, name, date, categoryId, amount)
+  }
+
+  return Detail.findOneAndUpdate(
+    { _id},
+    { name,
+    date,
+    amount,
+    userId,
+    categoryId
+   })
+  
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
+  } catch (err){
+    console.log(err)
+  }
 })
 
 router.delete('/:id', (req, res) => {
+  try{
   const userId = req.user._id
   const _id = req.params.id
   return Detail.findOne({ _id, userId })
     .then(detail => detail.remove())
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 
