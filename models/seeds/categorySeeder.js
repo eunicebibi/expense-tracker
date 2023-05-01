@@ -1,25 +1,20 @@
 const db = require('../../config/mongoose')
 const Category = require('../category')
 
-const SEED_CATEGORY = {
-  家居物業: 'fa-solid fa-house',
-  交通出行: 'fa-solid fa-van-shuttle',
-  休閒娛樂: 'fa-solid fa-face-grin-beam',
-  餐飲食品: 'fa-solid fa-utensils',
-  其他: 'fa-solid fa-pen',
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
 }
 
+const SEED_CATEGORY = [
+  { name: '家居物業', icon: 'fa-solid fa-house' },
+  { name: '交通出行', icon: 'fa-solid fa-van-shuttle' },
+  { name: '休閒娛樂', icon: 'fa-solid fa-face-grin-beam' },
+  { name: '餐飲食品', icon: 'fa-solid fa-utensils' },
+  { name: '其他', icon: 'fa-solid fa-pen' }
+]
+
 db.once('open', async () => {
-  try {
-    for (const [name, icon] of Object.entries(SEED_CATEGORY)) {
-      await Category.create({
-        name,
-        icon,
-      })
-    }
+  Category.create(SEED_CATEGORY)
     console.log('Category done.')
     process.exit()
-  } catch (err) {
-    console.error(err)
-  }
 })
