@@ -13,6 +13,8 @@ router.get('/new', (req, res) => {
 //儲存新增
 router.post('/', (req, res) => {
   // console.log(req.body)
+  const userId = req.user._id
+  const _id = req.params.id
   const detailsData = {
     categoryId: req.body.categoryId,
     userId: req.user._id,
@@ -27,16 +29,18 @@ router.post('/', (req, res) => {
 
 //修改
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  return Detail.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Detail.findByOne({_id, userId})
     .lean()
     .then((detail) => res.render('edit', { detail }))
     .catch(err => console.log(err))
 })
 
 router.put('/:id', (req, res) => {
-  const _id = req.params.id
   const userId = req.user._id
+  const _id = req.params.id
+  const { name, isDone } = req.body
   const detailsData = {
     name: req.body.name,
     date: req.body.date,
