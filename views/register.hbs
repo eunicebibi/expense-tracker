@@ -4,21 +4,21 @@
       <h1 class="text-center mt-3">註冊</h1>
       <form action="/users/register" method="POST">
         <div class="mb-3">
-          <label for="name" class="mb-2">請輸入姓名</label>
-          <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" value="{{name}}">
+          <label for="name" class="mb-2">請輸入姓名<span class="text-danger">*</span></label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" value="{{name}}" required>
         </div>
         <div class="mb-3">
-          <label for="email" class="mb-2">請輸入Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" value="{{ email }}">
+          <label for="email" class="mb-2">請輸入Email<span class="text-danger">*</span></label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" value="{{ email }}" required>
         </div>
         <div class="mb-3">
-          <label for="password" class="mb-2">請輸入密碼</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" value="{{ password}}">
+          <label for="password" class="mb-2">請輸入密碼<span class="text-danger">*</span></label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" value="{{ password}}" required>
         </div>
         <div class="mb-3">
-          <label for="confirmPassword" class="mb-2">請再次輸入密碼</label>
+          <label for="confirmPassword" class="mb-2">請再次輸入密碼<span class="text-danger">*</span></label>
           <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
-            placeholder="Confirm Password" value="{{ confirmPassword }}">
+            placeholder="Confirm Password" value="{{ confirmPassword }}" required>
         </div>
         <button type="submit" class="btn btn-primary btn-block">確定註冊</button>
       </form>
