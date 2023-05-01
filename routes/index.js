@@ -6,9 +6,7 @@ const details = require('./modules/details')
 const filter = require('./modules/filter')
 const users = require('./modules/users')  
  
-
-
-router.use('/users', authenticator, users) 
+router.use('/users', users) 
 router.use('/details', authenticator, details)
 router.use('/filter', authenticator, filter)
 router.use('/', authenticator, home)
