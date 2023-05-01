@@ -1,13 +1,8 @@
 const mongoose = require('mongoose')
 const Detail = require('../detail') 
 const Category = require('../category')
+const db = require('../../config/mongoose')
 const recordsData = require('../../records').results
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.set('strictQuery', false)
 
 const db = mongoose.connection
 db.on('error', () => {
