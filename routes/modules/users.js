@@ -8,6 +8,11 @@ router.get('/login', (req, res) => {
   res.render('login')
 })
 
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/users/login'
+}))
+
 router.get('/logout', function (req, res, next) {
   req.logout(function (err) {
     if (err) { return next(err); }
@@ -47,7 +52,7 @@ router.post('/register', (req, res) => {
     if (user) {
       errors.push({ message: '這個Email已經註冊過' })
       // console.log('User already exists.')
-      res.render('register', {
+       return res.render('register', {
         name,
         email,
         password,
@@ -76,11 +81,6 @@ router.post('/register', (req, res) => {
   })
     .catch(err => console.log(err))
 })
-
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/users/login'
-}))
 
 
 module.exports = router
