@@ -3,7 +3,7 @@
   <div name="new-remind"><span class="text-danger">*</span>符號為必填欄位</div>
 </div>
 <div class="container">
-  <form action="/{{detail._id}}?_method=PUT" method="POST" >
+  <form action="/details/{{detail._id}}?_method=PUT" method="POST" >
     <div class="col-7 border-bottom bg-success p-2 text-dark bg-opacity-10 container justify-content-md-center">
       {{!-- 細項 --}}
       {{> message}}
@@ -30,7 +30,7 @@
     </div>
     <div class="text-center mt-5">
       <button type="submit" class="btn btn-primary" name="new">
-        新增支出
+        確定修改完成
       </button>
       <a href="/">
         <button type="button" class="btn btn-outline-secondary">

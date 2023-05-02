@@ -7,7 +7,6 @@ const { editValidation, newValidation } = require('../../tools/validation')
 //新增頁面
 router.get('/new', async(req, res) => {
   const categories = await Category.find().lean()
-  console.log('new')
   res.render('new', { categories })
 })
 
@@ -85,10 +84,8 @@ router.delete('/:id', (req, res) => {
   try{
   const userId = req.user._id
   const _id = req.params.id
-  return Detail.findOne({ _id, userId })
-    .then(detail => detail.remove())
+  return Detail.findOneAndDelete({_id, userId})
     .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
   } catch (err) {
     console.log(err)
   }
