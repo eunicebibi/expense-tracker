@@ -17,6 +17,7 @@ db.once('open', async() => {
   categories.map(category => {
     categoryIds[category.name] = category._id
   })
+  //種子資料
   const SEED_USER = {
     name: 'user',
     email: 'user@example.com',

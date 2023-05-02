@@ -1,11 +1,12 @@
 <div class="text-center mt-5 mb-4">
-  <h3 name="new-title">請輸入你的支出 </h3>
+  <h3 name="new-title">修改支出資料 </h3>
   <div name="new-remind"><span class="text-danger">*</span>符號為必填欄位</div>
 </div>
 <div class="container">
   <form action="/{{detail._id}}?_method=PUT" method="POST" >
     <div class="col-7 border-bottom bg-success p-2 text-dark bg-opacity-10 container justify-content-md-center">
       {{!-- 細項 --}}
+      {{> message}}
       <label for="name" class="form-label">名稱<span class="text-danger">*</span></label>
       <input type="text" class="form-control" id="name" placeholder="請輸入花費名稱" name="name" value="{{detail.name}}" required>
     </div>
@@ -14,9 +15,9 @@
       <input type="date" class="form-control" id="date" placeholder="請輸入英文店名" name="date" value="{{detail.date}}" required>
     </div>
     <div class="col-7 border-bottom bg-success p-2 text-dark bg-opacity-10 container justify-content-md-center">
-      <label for="caterogy" class="form-label">類別<span class="text-danger">*</span></label>
+      <label for="caterogyId" class="form-label">類別<span class="text-danger">*</span></label>
       <select name="categoryId" id="categoryId" class="form-control" value="" required>
-        <option value="{{detail.categoryId}}" hidden="hidden">{{categoryName}}</option>
+        <option value="{{detail.categoryId}}" hidden="hidden">{{detail.categoryName}}</option>
         {{#each categories}}
         <option value="{{this._id}}">{{this.name}}</option>
         {{/each}}

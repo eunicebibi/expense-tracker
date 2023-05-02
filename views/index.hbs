@@ -6,16 +6,16 @@
   <form action="/filter" method="POST" >
   <select name="filter" id="filter" class="form-select form-select-bg mb-3 mt-5" onchange="this.form.submit()">
     <option selected>類別</option>
-    {{#if categoryName}}
-    <option value="{{categoryId}}" hidden="hidden" selected="selected">{{categoryName}}</option>
+    {{#if category}}
+    <option value="{{category._id}}" hidden="hidden" selected="selected">{{category.name}}</option>
     {{/if}}
-    {{#each categoryName}}
+    {{#each categories}}
         <option value="{{this._id}}">{{this.name}}</option>
     {{/each}}
   </select>
   </form>
 </div>
-
+{{> message}}
 {{!-- 金額顯示 --}}
 <div name="total" id="total" class="flex-column align-items-center m-2 ">
   <p >總金額：</p>
@@ -25,7 +25,7 @@
 </div>
 
 {{!-- 細項顯示 --}}
-{{#each details}}
+{{#each mapDetails}}
 <div class="border-bottom bg-success p-2 text-dark bg-opacity-10 container justify-content-md-center" name="detail-outer">
   <div class="row justify-content-md-center"  name="detail-list">
     <div class="col col-lg-2" name="category">

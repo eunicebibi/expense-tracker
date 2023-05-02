@@ -11,11 +11,11 @@ router.get('/new', async(req, res) => {
 })
 
 //儲存新增
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
   // console.log(req.body)
 try{
   const userId = req.user._id
-  const { name, date, categoryId, amount } =req.body
+  const { name, date, categoryId, amount } = req.body
   const categories = await Category.find().lean()
 
   if (name.length > 50){
@@ -63,12 +63,14 @@ try{
   }
 
   return Detail.findOneAndUpdate(
-    { _id},
-    { name,
-    date,
-    amount,
-    userId,
-    categoryId
+    { 
+      _id
+    },{ 
+      name,
+      date,
+      amount,
+      userId,
+      categoryId
    })
   
     .then(() => res.redirect('/'))

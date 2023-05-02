@@ -11,9 +11,9 @@ router.post('/', async (req, res) => {
     if (categoryId === 'all') {
       res.redirect('/')
     } else {
-      const details = Detail.find({ categoryId, userId }).lean()
-      const categories = Category.find().lean()
-      const category = Category.findOne({ _id: categoryId }).lean()
+      const details = await Detail.find({ categoryId, userId }).lean()
+      const categories = await Category.find().lean()
+      const category = await Category.findOne({ _id: categoryId }).lean()
       const mapDetails = details.map((detail) => {
         return {
           ...detail,
