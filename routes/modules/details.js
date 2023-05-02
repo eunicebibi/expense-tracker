@@ -7,6 +7,7 @@ const { editValidation, newValidation } = require('../../tools/validation')
 //新增頁面
 router.get('/new', async(req, res) => {
   const categories = await Category.find().lean()
+  console.log('new')
   res.render('new', { categories })
 })
 
