@@ -7,13 +7,12 @@ const Category = require('../category')
 const db = require('../../config/mongoose')
 const User = require('../user')
 
-const db = mongoose.connection
 db.on('error', () => {
   console.log('mongodb error!')
 })
 db.once('open', async() => {
   console.log('mongodb connected!')
-  const categories = Category.find().lean()
+  const categories = await Category.find().lean()
   const categoryIds = {}
   categories.map(category => {
     categoryIds[category.name] = category._id

@@ -14,7 +14,7 @@ const SEED_CATEGORY = [
 ]
 
 db.once('open', async () => {
-  Category.create(SEED_CATEGORY)
+  await Category.create(SEED_CATEGORY)
     console.log('Category done.')
     process.exit()
 })
