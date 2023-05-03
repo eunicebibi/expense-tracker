@@ -26,36 +26,33 @@
 
 {{!-- 細項顯示 --}}
 {{#each mapDetails}}
-<div class="border-bottom bg-success p-2 text-dark bg-opacity-10 container justify-content-md-center" name="detail-outer">
-  <div class="row justify-content-md-center"  name="detail-list">
-    <div class="col col-lg-2" name="category">
-      <i class="{{ this.icon }}"></i>
+<div class="border-bottom bg-success text-dark bg-opacity-10 container " name="detail-outer">
+  <div class="d-flex row align-items-center"  name="detail-list">
+    <div class=" col col-lg-2" name="category">
+      <h1 class="text-success  "><i class="{{ this.icon }}"></i></h1>
     </div>
-    <div class="col-md-auto" name="detail-middle">
-      <div name="detail-info"></div>
-        <div name="detail-name">
-          {{this.name}}
-          </div>
-        <div name="detail-date">
-          {{this.date}}
-          </div>
-      <div class="col col-lg-2" name="detail-amount">
-        {{this.amount}}
-        </div>
+    <div class="col col-lg-7" name="detail-middle">
+      <div name="detail-info">
+        <p class="text-muted text-secondary ">{{ this.date }}</p>
+        <h4 class="fw-bold text-secondary ">{{ this.name }}</h4>
+        <h5 class="fw-bold text-secondary ">${{ this.amount }}</h5>     
+      </div>
     </div>
-    <div class="col col-lg-2" name="edit_delete">
-     <a class="btn btn-outline-secondary" href="./details/{{ this._id }}/edit">修改</a>
+    <div class="col col-lg-3" name="edit_delete">
+    <form action="./details/{{ this._id }}/edit"style="display: inline;">
+    <button class="btn btn-outline-primary" type="submit">修改</button>
+    </form>
      <form action="./details/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-     <button class="btn btn-outline-danger" type="submit">delete</button>
+     <button class="btn btn-outline-danger" type="submit">刪除</button>
      </form>
     </div>
   </div>
 </div>
 {{/each}}
 {{!-- 新增品項支出按鈕 --}}
-<div class="text-center mt-5">
+  <div class="text-center mt-5">
     <a href="/details/new"><button class="btn btn-outline-success" type="submit" id="create">新增支出</button></a>
-</div>
-</div>
-</div>
+  </div>
+   </div>
+ </div>
 </div>
