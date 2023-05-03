@@ -19,27 +19,27 @@ db.once('open', async() => {
   })
   //種子資料
   const SEED_USER = {
-    name: 'user',
+    name: '廣志',
     email: 'user@example.com',
-    password: '12345678'
+    password: '12345'
   }
   const SEED_DETAILS = [{
-    name: '早餐',
+    name: '美芽的早餐',
     date: Date.now(),
     amount: 30,
     categoryId: categoryIds['餐飲食品']
   }, {
-    name: '交通費',
+    name: '到公司的交通費',
     date: Date.now(),
     amount: 100,
     categoryId: categoryIds['交通出行']
   }, {
-    name: '出遊費用',
+    name: '小新的玩具',
     date: Date.now(),
     amount: 2000,
     categoryId: categoryIds['休閒娛樂']
   }, {
-    name: '買電腦',
+    name: '小白的狗屋',
     date: Date.now(),
     amount: 32000,
     categoryId: categoryIds['家居物業']
