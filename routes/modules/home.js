@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     const category = await Category.findOne({_id: categoryId}).lean()
     return {
       ...detail,
-      date: detail.date.toLocaleDateString(),
+      date: detail.date.toISOString().slice(0, 10),
       icon: category.icon
     }
   }))
